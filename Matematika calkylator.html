@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Задания</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f3f3f3;
+    text-align:center;
+}
+.block{
+    background:white;
+    width:400px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+input{
+    margin:5px;
+    padding:5px;
+    width:80%;
+}
+button{
+    padding:7px 15px;
+    margin-top:10px;
+    cursor:pointer;
+}
+.result{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Задания</h1>
+
+<!-- №1 Квадратное уравнение -->
+<div class="block">
+<h3>1 Квадратное уравнение</h3>
+<input type="number" id="a" placeholder="a">
+<input type="number" id="b" placeholder="b">
+<input type="number" id="c" placeholder="c">
+<button onclick="solveQuadratic()">Найти корни</button>
+<div class="result" id="res1"></div>
+</div>
+
+<!-- №2 Тройка Пифагора -->
+<div class="block">
+<h3>2 Тройка Пифагора</h3>
+<input type="number" id="p1" placeholder="Число 1">
+<input type="number" id="p2" placeholder="Число 2">
+<input type="number" id="p3" placeholder="Число 3">
+<button onclick="checkPythagoras()">Проверить</button>
+<div class="result" id="res2"></div>
+</div>
+
+<!-- №3 Делители числа -->
+<div class="block">
+<h3>3 Делители числа</h3>
+<input type="number" id="num" placeholder="Введите число">
+<button onclick="getDivisors()">Показать делители</button>
+<div class="result" id="res3"></div>
+</div>
+
+<!-- №4 Общие делители -->
+<div class="block">
+<h3>4 Общие делители</h3>
+<input type="number" id="n1" placeholder="Число 1">
+<input type="number" id="n2" placeholder="Число 2">
+<button onclick="commonDivisors()">Найти</button>
+<div class="result" id="res4"></div>
+</div>
+
+<!-- №5 НОД -->
+<div class="block">
+<h3>5 НОД</h3>
+<input type="number" id="g1" placeholder="Число 1">
+<input type="number" id="g2" placeholder="Число 2">
+<button onclick="gcd()">Найти НОД</button>
+<div class="result" id="res5"></div>
+</div>
+
+<!-- №6 НОК -->
+<div class="block">
+<h3>6 НОК</h3>
+<input type="number" id="l1" placeholder="Число 1">
+<input type="number" id="l2" placeholder="Число 2">
+<button onclick="lcm()">Найти НОК</button>
+<div class="result" id="res6"></div>
+</div>
+
+<script>
+// №1
+function solveQuadratic(){
+let a = +document.getElementById("a").value;
+let b = +document.getElementById("b").value;
+let c = +document.getElementById("c").value;
+
+let d = b*b - 4*a*c;
+
+if(d > 0){
+let x1 = (-b + Math.sqrt(d)) / (2*a);
+let x2 = (-b - Math.sqrt(d)) / (2*a);
+res1.innerHTML = "x1 = " + x1 + "<br>x2 = " + x2;
+}
+else if(d == 0){
+let x = -b/(2*a);
+res1.innerHTML = "x = " + x;
+}
+else{
+res1.innerHTML = "Корней нет";
+}
+}
+
+// №2
+function checkPythagoras(){
+let arr = [
++p1.value,
++p2.value,
++p3.value
+];
+
+arr.sort((a,b)=>a-b);
+
+if(arr[2]**2 == arr[0]**2 + arr[1]**2){
+res2.innerHTML = "Это тройка Пифагора";
+}else{
+res2.innerHTML = "Не является тройкой Пифагора";
+}
+}
+
+// №3
+function getDivisors(){
+let n = +num.value;
+let result = "";
+for(let i=1;i<=n;i++){
+if(n%i==0){
+result += i + " ";
+}
+}
+res3.innerHTML = result;
+}
+
+// №4
+function commonDivisors(){
+let a = +n1.value;
+let b = +n2.value;
+let result = "";
+for(let i=1;i<=Math.min(a,b);i++){
+if(a%i==0 && b%i==0){
+result += i + " ";
+}
+}
+res4.innerHTML = result;
+}
+
+// №5 НОД
+function gcd(){
+let a = +g1.value;
+let b = +g2.value;
+
+while(b!=0){
+let temp = b;
+b = a % b;
+a = temp;
+}
+res5.innerHTML = "НОД = " + a;
+}
+
+// №6 НОК
+function lcm(){
+let a = +l1.value;
+let b = +l2.value;
+
+let x = a;
+let y = b;
+
+while(y!=0){
+let temp = y;
+y = x % y;
+x = temp;
+}
+let nod = x;
+res6.innerHTML = "НОК = " + (a*b/nod);
+}
+</script>
+
+</body>
+</html>

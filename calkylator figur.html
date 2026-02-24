@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Геометрические калькуляторы</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+    }
+
+    .block {
+        background: white;
+        padding: 20px;
+        margin: 20px auto;
+        width: 350px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+        padding: 5px;
+        margin: 5px;
+        width: 80%;
+    }
+
+    button {
+        padding: 7px 15px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .result {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>Геометрические калькуляторы</h1>
+
+<!-- КВАДРАТ -->
+<div class="block">
+    <h2>№1 Квадрат</h2>
+    <input type="number" id="squareSide" placeholder="Сторона">
+    <button onclick="calcSquare()">Рассчитать</button>
+    <div class="result" id="squareResult"></div>
+</div>
+
+<!-- ПРЯМОУГОЛЬНИК -->
+<div class="block">
+    <h2>№2 Прямоугольник</h2>
+    <input type="number" id="rectA" placeholder="Длина">
+    <input type="number" id="rectB" placeholder="Ширина">
+    <button onclick="calcRectangle()">Рассчитать</button>
+    <div class="result" id="rectResult"></div>
+</div>
+
+<!-- КРУГ -->
+<div class="block">
+    <h2>№3 Круг</h2>
+    <input type="number" id="circleR" placeholder="Радиус">
+    <button onclick="calcCircle()">Рассчитать</button>
+    <div class="result" id="circleResult"></div>
+</div>
+
+<!-- ТРЕУГОЛЬНИК -->
+<div class="block">
+    <h2>№4 Треугольник</h2>
+    <input type="number" id="triA" placeholder="Сторона A">
+    <input type="number" id="triB" placeholder="Сторона B">
+    <input type="number" id="triC" placeholder="Сторона C">
+    <button onclick="calcTriangle()">Рассчитать</button>
+    <div class="result" id="triResult"></div>
+</div>
+
+<script>
+function calcSquare() {
+    let a = Number(document.getElementById("squareSide").value);
+    let area = a * a;
+    let perimeter = 4 * a;
+    document.getElementById("squareResult").innerHTML =
+        "Площадь: " + area + "<br>Периметр: " + perimeter;
+}
+
+function calcRectangle() {
+    let a = Number(document.getElementById("rectA").value);
+    let b = Number(document.getElementById("rectB").value);
+    let area = a * b;
+    let perimeter = 2 * (a + b);
+    document.getElementById("rectResult").innerHTML =
+        "Площадь: " + area + "<br>Периметр: " + perimeter;
+}
+
+function calcCircle() {
+    let r = Number(document.getElementById("circleR").value);
+    let area = Math.PI * r * r;
+    let length = 2 * Math.PI * r;
+    document.getElementById("circleResult").innerHTML =
+        "Площадь: " + area.toFixed(2) +
+        "<br>Длина окружности: " + length.toFixed(2);
+}
+
+function calcTriangle() {
+    let a = Number(document.getElementById("triA").value);
+    let b = Number(document.getElementById("triB").value);
+    let c = Number(document.getElementById("triC").value);
+
+    let p = (a + b + c) / 2;
+    let area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+    if (area > 0) {
+        document.getElementById("triResult").innerHTML =
+            "Площадь: " + area.toFixed(2);
+    } else {
+        document.getElementById("triResult").innerHTML =
+            "Такого треугольника не существует";
+    }
+}
+</script>
+
+</body>
+</html>
